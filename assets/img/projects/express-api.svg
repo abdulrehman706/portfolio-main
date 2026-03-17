@@ -1,0 +1,14 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#000000"/>
+  <path d="M0 50h800M0 100h800M0 150h800M0 200h800M0 250h800M0 300h800M0 350h800M0 400h800M50 0v450M100 0v450M150 0v450M200 0v450M250 0v450M300 0v450M350 0v450M400 0v450M450 0v450M500 0v450M550 0v450M600 0v450M650 0v450M700 0v450M750 0v450" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- API / Server Nodes -->
+  <rect x="300" y="150" width="200" height="150" rx="5" fill="#1a1a1a" stroke="#FFCD05" stroke-width="2"/>
+  <path d="M320 180h160M320 210h160M320 240h100" stroke="#FFCD05" stroke-width="4" opacity="0.6"/>
+  <!-- Connection nodes -->
+  <circle cx="200" cy="225" r="30" fill="#1a1a1a" stroke="#FFCD05" stroke-width="2"/>
+  <circle cx="600" cy="225" r="30" fill="#1a1a1a" stroke="#FFCD05" stroke-width="2"/>
+  <path d="M230 225h70M500 225h70" stroke="#FFCD05" stroke-width="2"/>
+  <text x="400" y="350" fill="#FFCD05" font-family="monospace" font-size="18" text-anchor="middle" font-weight="bold">RESTFUL EXPRESS API</text>
+  <text x="200" y="230" fill="#FFCD05" font-family="monospace" font-size="12" text-anchor="middle">GET</text>
+  <text x="600" y="230" fill="#FFCD05" font-family="monospace" font-size="12" text-anchor="middle">POST</text>
+</svg>
