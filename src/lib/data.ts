@@ -7,6 +7,7 @@ export const personalInfo = {
   github: "https://github.com/abdulrehman706",
   linkedin: "https://www.linkedin.com/in/abdulrehman007034/",
   resume: "/Abdul_Rehman_CV.pdf",
+  resumePage: "/resume/",
   heroHeading: { first: "Abdul", last: "Rehman." },
   footerTagline: "Building production APIs, data pipelines, and applied AI systems.",
   ogImage: "/og.png",

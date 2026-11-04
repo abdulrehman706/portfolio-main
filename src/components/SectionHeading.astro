@@ -1,14 +1,41 @@
 ---
+interface Props {
+  index?: string;
+  label?: string;
+  tone?: "accent" | "inherit";
+}
+
+const { index, label, tone = "accent" } = Astro.props;
 ---
 
-<div class="mb-10 flex items-end justify-between gap-6 border-b-2 border-current pb-4 md:mb-14">
-  <h2 class="font-display min-w-0 text-[clamp(2.25rem,9vw,5rem)] md:text-[clamp(2.7rem,7vw,5rem)] leading-[0.9] tracking-[-0.02em]">
-    <slot />
-  </h2>
-  <span
-    class="pb-1 font-display text-4xl leading-none opacity-25 md:text-6xl"
-    aria-hidden="true"
-  >
-    ↘
-  </span>
+<div class="mb-10 md:mb-14">
+  {
+    (index || label) && (
+      <p
+        class:list={[
+          "mb-3 flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.22em]",
+          tone === "accent" ? "text-ember" : "text-current",
+        ]}
+      >
+        {index && <span>{index}</span>}
+        <span class="h-px w-10 bg-current" aria-hidden="true" />
+        {label && <span class="opacity-80">{label}</span>}
+      </p>
+    )
+  }
+  <div class="flex items-end justify-between gap-6 border-b-2 border-current pb-4">
+    <h2 class="font-display min-w-0 text-[clamp(2rem,8vw,4.25rem)] leading-[0.95] md:text-[clamp(2.5rem,6vw,4.25rem)]">
+      <slot />
+    </h2>
+    <svg
+      class="mb-2 h-7 w-7 shrink-0 opacity-40 md:h-10 md:w-10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      aria-hidden="true"
+    >
+      <path d="M12 3 22 20H2Z" />
+    </svg>
+  </div>
 </div>

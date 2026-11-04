@@ -6,7 +6,7 @@ import SectionHeading from "./SectionHeading.astro";
 <section id="awards" class="scroll-mt-16 bg-acid py-20 text-ink md:py-28">
   <div class="mx-auto max-w-6xl px-6 md:px-8">
     <div data-reveal>
-      <SectionHeading>Honours & Awards</SectionHeading>
+      <SectionHeading index="04" label="Achievements" tone="inherit">Honours & Awards</SectionHeading>
     </div>
 
     <div class="divide-y divide-ink border-b-2 border-ink">
@@ -23,7 +23,7 @@ import SectionHeading from "./SectionHeading.astro";
             </div>
             <div class="flex flex-wrap items-center gap-2 text-sm md:justify-end">
               <span class="font-semibold text-ink/80">{award.type}</span>
-              <span class="bg-ink px-3 py-1.5 font-black text-white md:min-w-40 md:text-center">
+              <span class="bg-ink px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-[0.1em] text-white md:min-w-40 md:text-center">
                 {award.position}
               </span>
             </div>

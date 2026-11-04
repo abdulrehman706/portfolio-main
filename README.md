@@ -48,7 +48,7 @@ Copy `.env.example` to `.env` when you need to override the site URL locally. `O
 
 ## Update portfolio content
 
-Edit [`src/lib/data.ts`](src/lib/data.ts) to update personal details, hero and footer copy, section intros, work experience, skills, projects, awards, and education. Replace `src/assets/profile.jpg` to update the portrait; Astro generates the responsive AVIF and JPEG variants at build time.
+Edit [`src/lib/data.ts`](src/lib/data.ts) to update personal details, hero and footer copy, section intros, work experience, skills, projects, awards, and education.
 
 Each entry in `selectedWork` names its illustration through `artwork`, which maps to a branch of [`src/components/ProjectArtwork.astro`](src/components/ProjectArtwork.astro).
 

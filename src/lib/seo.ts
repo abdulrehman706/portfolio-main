@@ -14,7 +14,7 @@ export function serializeJsonLd(
   return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
-export function buildPersonJsonLd(origin: string, imagePath: string): Record<string, unknown> {
+export function buildPersonJsonLd(origin: string): Record<string, unknown> {
   const currentRole = workExperience[0];
 
   return {
@@ -23,7 +23,6 @@ export function buildPersonJsonLd(origin: string, imagePath: string): Record<str
     name: personalInfo.name,
     email: personalInfo.email,
     url: absoluteUrl(origin, "/"),
-    image: absoluteUrl(origin, imagePath),
     sameAs: [personalInfo.github, personalInfo.linkedin],
     description: DEFAULT_SITE_DESCRIPTION,
     ...(currentRole

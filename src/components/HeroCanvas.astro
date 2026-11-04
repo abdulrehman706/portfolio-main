@@ -48,26 +48,32 @@ void main() {
     * pointerStrength;
   float cursorGlow = exp(-cursorDistance * 5.5) * pointerStrength;
 
-  vec3 mist = vec3(0.93, 0.97, 0.95);
-  vec3 ember = vec3(0.04, 0.62, 0.42);
-  vec3 orange = vec3(0.05, 0.55, 0.55);
-  vec3 acid = vec3(0.45, 0.95, 0.72);
-  vec3 sun = vec3(0.25, 0.82, 0.70);
-  vec3 ink = vec3(0.015, 0.03, 0.025);
+  // Light theme: white paper with emerald washes.
+  vec3 mist = vec3(0.965, 0.99, 0.975);
+  vec3 ember = vec3(0.06, 0.62, 0.32);
+  vec3 orange = vec3(0.28, 0.78, 0.45);
+  vec3 sun = vec3(0.62, 0.92, 0.48);
+
+  // Dark theme: near-black with molten orange glows.
+  vec3 ink = vec3(0.012, 0.01, 0.008);
+  vec3 lava = vec3(0.92, 0.33, 0.04);
+  vec3 rust = vec3(0.42, 0.1, 0.01);
+  vec3 flare = vec3(1.0, 0.56, 0.12);
+  vec3 spark = vec3(1.0, 0.74, 0.28);
 
   float emberField = smoothstep(-0.75, 0.9, bands + glowA * 1.8);
   float orangeField = smoothstep(-0.45, 1.25, fold + glowB * 1.4);
-  vec3 lightColor = mix(mist, ember, emberField * 0.62);
-  lightColor = mix(lightColor, orange, orangeField * 0.5);
+  vec3 lightColor = mix(mist, ember, emberField * 0.5);
+  lightColor = mix(lightColor, orange, orangeField * 0.42);
   lightColor = mix(lightColor, sun, glowA * 0.42);
   lightColor = mix(lightColor, orange, glowB * 0.28);
   lightColor += mix(sun, ember, uv.x) * (ripple * 0.16 + cursorGlow * 0.1);
 
-  vec3 darkColor = mix(ink, ember, emberField * 0.72);
-  darkColor = mix(darkColor, orange, orangeField * 0.52);
-  darkColor += acid * glowA * 0.44;
-  darkColor += sun * glowB * 0.36;
-  darkColor += mix(sun, acid, uv.x) * (ripple * 0.32 + cursorGlow * 0.28);
+  vec3 darkColor = mix(ink, rust, emberField * 0.7);
+  darkColor = mix(darkColor, lava, orangeField * 0.32);
+  darkColor += flare * glowA * 0.34;
+  darkColor += spark * glowB * 0.22;
+  darkColor += mix(spark, flare, uv.x) * (ripple * 0.3 + cursorGlow * 0.26);
 
   float vignette = smoothstep(0.95, 0.18, length(p * vec2(0.8, 1.0)));
   lightColor = mix(mist, lightColor, 0.94 + vignette * 0.05);

@@ -79,14 +79,15 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin);
     <title>{title}</title>
     <Font cssVariable="--font-body" preload={[{ style: "normal", subset: "latin" }]} />
     <Font cssVariable="--font-heading" preload={[{ subset: "latin" }]} />
+    <Font cssVariable="--font-mono-game" />
     <meta
       name="theme-color"
-      content="#f5faf8"
+      content="#fbfdfc"
       media="(prefers-color-scheme: light)"
     />
     <meta
       name="theme-color"
-      content="#1a201e"
+      content="#050505"
       media="(prefers-color-scheme: dark)"
     />
   <script is:inline>

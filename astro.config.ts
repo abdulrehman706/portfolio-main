@@ -21,9 +21,16 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
-      name: "Anton",
+      name: "Rubik",
       cssVariable: "--font-heading",
-      weights: [400],
+      weights: ["700 800"],
+      styles: ["normal"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Space Mono",
+      cssVariable: "--font-mono-game",
+      weights: [400, 700],
       styles: ["normal"],
     },
   ],

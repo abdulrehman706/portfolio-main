@@ -37,7 +37,7 @@ const NAV_ITEMS = [
         NAV_ITEMS.map((item) => (
           <a
             href={item.href}
-            class="pressable flex min-h-11 items-center px-1.5 text-muted-foreground transition-colors duration-150 hover:text-foreground"
+            class="pressable flex min-h-11 items-center px-1.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-150 hover:text-ember"
           >
             {item.label}
           </a>
@@ -47,10 +47,10 @@ const NAV_ITEMS = [
 
     <div class="flex items-center gap-1 text-foreground">
       <a
-        href={personalInfo.resume}
+        href={personalInfo.resumePage}
         target="_blank"
         rel="noopener noreferrer"
-        class="pressable hidden min-h-10 items-center gap-2 border border-foreground/35 px-3 text-sm font-bold text-muted-foreground transition-colors duration-150 hover:border-foreground hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground md:inline-flex"
+        class="btn-hud pressable hidden min-h-10 items-center gap-2 px-3 pb-2.5 pt-1.5 text-xs text-foreground hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground md:inline-flex"
       >
         <Icon icon={DocumentAttachmentIcon} class="h-4 w-4" strokeWidth={2} />
         Resume
@@ -89,7 +89,7 @@ const NAV_ITEMS = [
           ))
         }
         <a
-          href={personalInfo.resume}
+          href={personalInfo.resumePage}
           target="_blank"
           rel="noopener noreferrer"
           class="pressable flex min-h-14 items-center justify-between border-b border-ink/30 text-ink"

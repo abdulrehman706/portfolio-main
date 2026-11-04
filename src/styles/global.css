@@ -2,33 +2,41 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: oklch(0.975 0.004 165);
-  --foreground: oklch(0.2 0.01 170);
-  --primary: oklch(0.5 0.12 163);
-  --muted-foreground: oklch(0.42 0.01 170);
-  --border: oklch(0.8 0.01 170);
-  --ring: oklch(0.5 0.12 163);
-  --ember: oklch(0.5 0.12 163);
-  --coral: oklch(0.72 0.16 160);
-  --acid: oklch(0.91 0.09 168);
-  --sun: oklch(0.82 0.12 190);
-  --ink: oklch(0.16 0.012 170);
-  --mist: oklch(0.93 0.008 165);
-  --hero-background: oklch(0.96 0.012 165);
+  /* Light: clean white with emerald green accents */
+  --background: oklch(0.99 0.002 150);
+  --foreground: oklch(0.18 0.012 155);
+  --primary: oklch(0.47 0.13 150);
+  --muted-foreground: oklch(0.42 0.012 155);
+  --border: oklch(0.86 0.01 150);
+  --ring: oklch(0.47 0.13 150);
+  --ember: oklch(0.47 0.13 150);
+  --coral: oklch(0.76 0.17 150);
+  --acid: oklch(0.92 0.07 150);
+  --sun: oklch(0.88 0.17 128);
+  --ink: oklch(0.14 0.005 155);
+  --mist: oklch(0.955 0.012 150);
+  --hero-background: oklch(0.98 0.006 150);
   --hero-foreground: var(--ink);
+  --paper: oklch(0.985 0.004 150);
 }
 
 .dark {
-  --background: oklch(0.165 0.008 170);
-  --foreground: oklch(0.95 0.005 165);
-  --primary: oklch(0.8 0.15 160);
-  --muted-foreground: oklch(0.8 0.01 165);
-  --border: oklch(0.33 0.012 170);
-  --ring: oklch(0.8 0.15 160);
-  --ember: oklch(0.8 0.15 160);
-  --mist: oklch(0.23 0.01 170);
-  --hero-background: oklch(0.12 0.015 170);
+  /* Dark: pure black with molten orange accents */
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.96 0 0);
+  --primary: oklch(0.72 0.19 47);
+  --muted-foreground: oklch(0.78 0.005 60);
+  --border: oklch(0.3 0.005 60);
+  --ring: oklch(0.72 0.19 47);
+  --ember: oklch(0.72 0.19 47);
+  --coral: oklch(0.72 0.19 47);
+  --acid: oklch(0.84 0.13 68);
+  --sun: oklch(0.87 0.15 85);
+  --ink: oklch(0.12 0 0);
+  --mist: oklch(0.17 0.004 60);
+  --hero-background: oklch(0.07 0 0);
   --hero-foreground: oklch(0.98 0 0);
+  --paper: oklch(0.96 0.01 70);
 }
 
 @theme inline {
@@ -46,6 +54,8 @@
   --color-mist: var(--mist);
   --color-hero-background: var(--hero-background);
   --color-hero-foreground: var(--hero-foreground);
+  --color-paper: var(--paper);
+  --font-mono: var(--font-mono-game);
   --font-sans: var(--font-body);
 }
 
@@ -163,66 +173,126 @@
   background:
     linear-gradient(
       90deg,
-      rgb(243 249 246 / 0.65) 0%,
-      rgb(243 249 246 / 0.18) 52%,
+      rgb(246 251 248 / 0.65) 0%,
+      rgb(246 251 248 / 0.18) 52%,
       transparent 100%
     ),
-    linear-gradient(0deg, rgb(243 249 246 / 0.14) 0%, transparent 45%);
+    linear-gradient(0deg, rgb(246 251 248 / 0.14) 0%, transparent 45%);
 }
 
 .dark .hero-scrim {
   background:
-    linear-gradient(
-      90deg,
-      rgb(6 14 11 / 0.88) 0%,
-      rgb(6 14 11 / 0.46) 52%,
-      rgb(6 14 11 / 0.12) 100%
-    ),
-    linear-gradient(0deg, rgb(6 14 11 / 0.72) 0%, transparent 45%);
+    linear-gradient(90deg, rgb(4 3 2 / 0.88) 0%, rgb(4 3 2 / 0.46) 52%, rgb(4 3 2 / 0.12) 100%),
+    linear-gradient(0deg, rgb(4 3 2 / 0.72) 0%, transparent 45%);
 }
 
 @media (max-width: 767px) {
   .hero-scrim {
-    background: linear-gradient(0deg, rgb(243 249 246 / 0.62) 0%, rgb(243 249 246 / 0.1) 100%);
+    background: linear-gradient(0deg, rgb(246 251 248 / 0.62) 0%, rgb(246 251 248 / 0.1) 100%);
   }
 
   .dark .hero-scrim {
-    background: linear-gradient(0deg, rgb(6 14 11 / 0.84) 0%, rgb(6 14 11 / 0.28) 100%);
+    background: linear-gradient(0deg, rgb(4 3 2 / 0.84) 0%, rgb(4 3 2 / 0.28) 100%);
   }
 }
 
-.portrait-reveal {
-  --reveal-x: 50%;
-  --reveal-y: 50%;
-  --reveal-opacity: 0;
-}
-
-.portrait-reveal-color {
-  opacity: var(--reveal-opacity);
-  filter: saturate(1.08) contrast(1.02);
-  mask-image: radial-gradient(
-    circle clamp(4.5rem, 9vw, 7rem) at var(--reveal-x) var(--reveal-y),
-    black 25%,
-    rgb(0 0 0 / 0.9) 55%,
-    transparent 100%
-  );
-  transition: opacity 120ms ease-out;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .portrait-reveal-color {
-    opacity: 1;
-    mask-image: none;
-  }
-}
-
-/* Display voice: Anton, condensed poster caps. */
+/* Display voice: Rubik heavy caps with arcade-style tracking. */
 @utility font-display {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.02em;
   font-optical-sizing: auto;
+}
+
+/* ---- Gaming HUD primitives ---------------------------------------------- */
+
+/* Outlined button with a heavy accent bar along the bottom edge. */
+.btn-hud {
+  position: relative;
+  border: 1px solid color-mix(in oklab, currentColor 55%, transparent);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition:
+    color 150ms ease-out,
+    background-color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.btn-hud::after {
+  content: "";
+  position: absolute;
+  inset: auto 4px 4px;
+  height: 3px;
+  background: var(--coral);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-hud:hover {
+  border-color: currentColor;
+}
+
+.btn-hud:hover::after {
+  transform: scaleX(0.35);
+}
+
+.btn-hud-primary {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: var(--ink);
+}
+
+.btn-hud-primary::after {
+  background: var(--ink);
+}
+
+/* Double-line frame: a thin outline offset from its content. */
+.hud-frame {
+  position: relative;
+  padding: 0.6rem;
+  border: 1px solid color-mix(in oklab, currentColor 40%, transparent);
+}
+
+/* Corner brackets, drawn with gradients so they need no extra markup. */
+.hud-corners {
+  --corner: var(--coral);
+  --corner-size: 1.1rem;
+  background:
+    linear-gradient(var(--corner) 0 0) top left / var(--corner-size) 2px,
+    linear-gradient(var(--corner) 0 0) top left / 2px var(--corner-size),
+    linear-gradient(var(--corner) 0 0) top right / var(--corner-size) 2px,
+    linear-gradient(var(--corner) 0 0) top right / 2px var(--corner-size),
+    linear-gradient(var(--corner) 0 0) bottom left / var(--corner-size) 2px,
+    linear-gradient(var(--corner) 0 0) bottom left / 2px var(--corner-size),
+    linear-gradient(var(--corner) 0 0) bottom right / var(--corner-size) 2px,
+    linear-gradient(var(--corner) 0 0) bottom right / 2px var(--corner-size);
+  background-repeat: no-repeat;
+}
+
+/* Faint scanlines and grid laid over the hero. */
+.hud-scanlines {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in oklab, var(--hero-foreground) 5%, transparent) 0 1px,
+      transparent 1px 4px
+    ),
+    linear-gradient(
+        90deg,
+        color-mix(in oklab, var(--hero-foreground) 7%, transparent) 1px,
+        transparent 1px
+      )
+      0 0 / 80px 80px;
+  mask-image: linear-gradient(180deg, black 0%, black 70%, transparent 100%);
+}
+
+/* Vertical side label, rotated like a spine. */
+.hud-spine {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 .prose {
@@ -239,10 +309,10 @@
 .prose h3 {
   margin-top: 2.75rem;
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 800;
   line-height: 1.1;
   text-transform: uppercase;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.02em;
   font-optical-sizing: auto;
 }
 

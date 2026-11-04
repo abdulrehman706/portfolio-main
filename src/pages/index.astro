@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import GlassHeader from "@/components/GlassHeader.astro";
 import HeroSection from "@/components/HeroSection.astro";
@@ -9,12 +8,10 @@ import ProjectsSection from "@/components/ProjectsSection.astro";
 import AwardsSection from "@/components/AwardsSection.astro";
 import EducationSection from "@/components/EducationSection.astro";
 import Footer from "@/components/Footer.astro";
-import portrait from "@/assets/profile.jpg";
 import { buildPersonJsonLd } from "@/lib/seo";
 
 const origin = (Astro.site ?? Astro.url.origin).toString();
-const personImage = await getImage({ src: portrait, width: 660, format: "jpeg" });
-const jsonLd = buildPersonJsonLd(origin, personImage.src);
+const jsonLd = buildPersonJsonLd(origin);
 ---
 
 <Layout jsonLd={jsonLd}>

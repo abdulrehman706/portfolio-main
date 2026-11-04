@@ -1,0 +1,137 @@
+---
+import { ArrowLeft01Icon, Download04Icon } from "@hugeicons/core-free-icons";
+import Icon from "@/components/Icon.astro";
+import Layout from "@/layouts/Layout.astro";
+import { personalInfo } from "@/lib/data";
+
+const fileName = personalInfo.resume.split("/").pop() ?? "resume.pdf";
+---
+
+<Layout
+  title={`Resume | ${personalInfo.name}`}
+  description={`Resume of ${personalInfo.name}, ${personalInfo.role}.`}
+>
+  <div class="flex min-h-screen flex-col bg-mist">
+    <header class="glass-chrome sticky top-0 z-50 w-full text-foreground">
+      <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 px-4 md:px-8">
+        <a
+          href="/"
+          class="pressable flex min-h-11 items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground hover:text-ember"
+        >
+          <Icon icon={ArrowLeft01Icon} class="h-4 w-4" strokeWidth={2} />
+          <span class="hidden sm:inline">Back to portfolio</span>
+          <span class="sm:hidden">Back</span>
+        </a>
+        <h1 class="min-w-0 truncate font-display text-sm md:text-base">
+          {personalInfo.name} · Resume
+        </h1>
+        <a
+          href={personalInfo.resume}
+          download={fileName}
+          class="btn-hud btn-hud-primary pressable inline-flex min-h-10 items-center gap-2 px-3 pb-2.5 pt-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+        >
+          <Icon icon={Download04Icon} class="h-4 w-4" strokeWidth={2} />
+          <span class="hidden sm:inline">Download PDF</span>
+          <span class="sm:hidden">PDF</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-5xl flex-1 px-3 py-6 md:px-8 md:py-10">
+      <div
+        class="flex flex-col items-center gap-6"
+        data-resume-viewer
+        data-src={personalInfo.resume}
+        aria-label={`Resume of ${personalInfo.name}`}
+        role="document"
+      >
+        <p class="py-24 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground" data-resume-status>
+          Loading resume…
+        </p>
+      </div>
+      <noscript>
+        <p class="py-12 text-center">
+          <a class="font-bold text-ember underline" href={personalInfo.resume}>Open the resume PDF</a>
+        </p>
+      </noscript>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  import { GlobalWorkerOptions, getDocument, type PDFDocumentProxy } from "pdfjs-dist";
+  import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+
+  GlobalWorkerOptions.workerSrc = workerUrl;
+
+  const viewer = document.querySelector<HTMLElement>("[data-resume-viewer]");
+  const status = viewer?.querySelector<HTMLElement>("[data-resume-status]");
+  const src = viewer?.dataset["src"];
+
+  async function renderPages(pdf: PDFDocumentProxy, container: HTMLElement) {
+    const width = container.clientWidth;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    const canvases: HTMLCanvasElement[] = [];
+
+    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+      const page = await pdf.getPage(pageNumber);
+      const baseViewport = page.getViewport({ scale: 1 });
+      const scale = Math.min(width, 900) / baseViewport.width;
+      const viewport = page.getViewport({ scale: scale * pixelRatio });
+
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.floor(viewport.width);
+      canvas.height = Math.floor(viewport.height);
+      canvas.style.width = `${Math.floor(viewport.width / pixelRatio)}px`;
+      canvas.style.height = `${Math.floor(viewport.height / pixelRatio)}px`;
+      canvas.className = "block max-w-full bg-white shadow-[0_18px_40px_-24px_rgb(0_0_0/0.6)]";
+      canvas.setAttribute("aria-label", `Resume page ${pageNumber} of ${pdf.numPages}`);
+      canvas.setAttribute("role", "img");
+
+      await page.render({ canvas, viewport }).promise;
+      canvases.push(canvas);
+    }
+
+    container.replaceChildren(...canvases);
+  }
+
+  async function start() {
+    if (!viewer || !src) return;
+    try {
+      const loadingTask = getDocument({ url: src });
+      const pdf = await loadingTask.promise;
+      await renderPages(pdf, viewer);
+
+      let lastWidth = viewer.clientWidth;
+      let timer = 0;
+      const resizeObserver = new ResizeObserver(() => {
+        if (Math.abs(viewer.clientWidth - lastWidth) < 40) return;
+        lastWidth = viewer.clientWidth;
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => void renderPages(pdf, viewer), 200);
+      });
+      resizeObserver.observe(viewer);
+      window.addEventListener(
+        "pagehide",
+        () => {
+          resizeObserver.disconnect();
+          window.clearTimeout(timer);
+          void loadingTask.destroy();
+        },
+        { once: true },
+      );
+    } catch (error) {
+      console.error(error);
+      if (status) {
+        status.textContent = "";
+        const link = document.createElement("a");
+        link.href = src;
+        link.textContent = "Couldn't display the resume here. Open the PDF instead.";
+        link.className = "font-bold normal-case tracking-normal text-ember underline";
+        status.append(link);
+      }
+    }
+  }
+
+  void start();
+</script>
